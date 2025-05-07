@@ -41,7 +41,7 @@ class FamilyStructure:
     def get_member(self, id):
         ## You have to implement this method
         ## Loop all the members and return the one with the given id
-        for m in self.members:
+        for m in self._members:
             if m["id"] == id:
                 return m
         return None #media hora de error por CamelCase... UwU...    

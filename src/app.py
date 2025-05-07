@@ -51,7 +51,7 @@ def add_member():
     if "first_name" not in data or "age" not in data or "lucky_numbers" not in data:
         return jsonify({"error": "Missing essential info."})
     jackson_family.add_member(data)
-    return jsonify({"Notification" "Member added."})
+    return jsonify({"Notification": "Member added."})
 
 #Eliminar 
 @app.route('/members/<int:id>', methods=['DELETE'])

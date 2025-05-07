@@ -29,7 +29,7 @@ class FamilyStructure:
         ## You have to implement this method
         ## Append the member to the list of _members
         if "id" not in member:
-            member["id"] = self.generate_id() #pos si no hay id pos que lo haga.
+            member["id"] = self._generate_id() #pos si no hay id pos que lo haga.
         member["last_name"] = self.last_name #con esto siempre sale Jackson...
         self._members.append(member)     
 

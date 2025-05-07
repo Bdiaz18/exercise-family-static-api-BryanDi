@@ -30,12 +30,40 @@ def sitemap():
 
 
 @app.route('/members', methods=['GET'])
-def handle_hello():
+def get_all_members():
     # This is how you can use the Family datastructure by calling its methods
     members = jackson_family.get_all_members()
-    response_body = {"hello": "world",
-                     "family": members}
-    return jsonify(response_body), 200
+    return jsonify(members), 200 #Sin el querido Hello world de 4geeks... :D
+
+@app.route('/members/<int:id>', methods=["GET"])
+def get_member(id):
+    member = jackson_family.get_member(id)
+    if member:
+        return jsonify(member), 200
+    else: 
+        return jsonify({"error": "impossible to find the member"}), 404 
+    
+#Añadir... 
+@app.route('/members', methods=['POST'])
+def add_member():
+    data = request.get_json()
+    #Este paso se puede evitar pero según Telipe le da un toque pro.
+    if "first_name" not in data or "age" not in data or "lucky_numbers" not in data:
+        return jsonify({"error": "Missing essential info."})
+    jackson_family.add_member(data)
+    return jsonify({"Notification" "Member added."})
+
+#Eliminar 
+@app.route('/members/<int:id>', methods=['DELETE'])
+def delete_member(id):
+    member = jackson_family.get_member(id)
+    if member:
+        jackson_family.delete_member(id)
+        return jsonify({"deleted": True}), 200
+    else:
+        return jsonify({"error"}), 404
+
+
 
 
 
